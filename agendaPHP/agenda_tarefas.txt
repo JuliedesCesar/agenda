@@ -1,0 +1,58 @@
+<?php 
+session_start();
+
+if(isset($_GET['tarefa']) && $_GET['tarefa'] != '')// comando para verificar se existe alguma tarefa.
+{
+$tarefa = array();
+$tarefa['tarefa'] = $_GET['tarefa'];
+
+if(isset($_GET['descricao']))
+{
+$tarefa['descricao'] = $_GET['descricao'];
+}
+else
+{
+$tarefa['descricao'] = '';
+}
+
+
+if(isset($_GET['prazo']))
+{
+$tarefa['prazo'] = $_GET['prazo'];
+}
+else
+{
+$tarefa['prazo'] = '';
+}
+
+$tarefa['prioridade'] = $_GET['prioridade'];
+
+if(isset($_GET['concluida']))
+{
+$tarefa['concluida'] = $_GET['concluida'];
+}
+else
+{
+$tarefa['concluida'] = '';
+}
+
+$_SESSION['lista_tarefas'][] = $tarefa;
+}
+
+
+if(isset($_GET['tarefa']))
+{
+$_SESSION['lista_tarefas'][] = $_GET['tarefa'];// adiciona a tarefa em array de sessÆo e mostra-o.
+echo "Nome informado: " . $_GET['tarefa'];
+}
+if(isset($_SESSION['lista_tarefas']))//verifica se h  uma lista_tarefas e adiciona em um array.
+{
+$lista_tarefas[] = $_SESSION['lista_tarefas'];
+}
+else 
+{
+$lista_tarefas = array();//cria uma lista.
+}
+
+include "template.php";
+?>
